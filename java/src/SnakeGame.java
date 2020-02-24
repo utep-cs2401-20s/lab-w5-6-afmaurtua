@@ -45,7 +45,7 @@ public class SnakeGame {
     public int neighbors(int i, int k){
        int length = 0;
        //top
-        if (){
+        if ((i-1 )){
 
         }
 
