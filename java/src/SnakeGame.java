@@ -6,7 +6,7 @@ public class SnakeGame {
 
     //default constructors
     public SnakeGame(){
-        int[] gameboard = new int[1];
+        int[][] gameboard = new int[1][];
     }
 
     //constructors
@@ -18,57 +18,82 @@ public class SnakeGame {
         //head[x][y] = true;
     }
 
-    public int[] findTailExhaustive(){
-        int[] result = new int[3];
-        int count = 0;
+    public int[] findTailExhaustive(){ //test cases
+        int[] tail = new int[3];
+        int length = 0;
         for(int i = 0; i < game.length; i++){ //going through the board
             for(int k = 0; k < game[i].length; k++){
-               if(game[i][k] == true){ //checking to see if the tail is there
-                   if(i == headPosition[0] && k == headPosition[1]){ //this is the head
-                       continue;
-                   }
-                   if(neighbors(i, k) == 1){ //checking
-                       result[0] = i;
-                       result[1] = k;
+               if(game[i][k] == true){//checking to see if the tail is there
+                   length++;
+                   if(neighbors(i, k) == 1){
+                       if(i == headPosition[0] && k == headPosition[1]){ //this is the head
+                           continue;
+                       }
+                       else{
+                           tail[0] = i; //storing where the tail is
+                           tail[1] = k;
+                       }
                    }
                }
             }
         }
-        result[2] = length();
+
+        tail[2] = length;
+        return tail;
     }
 
-    private int length() {
-        int length = 0;
-        return length;
-    }
 
     public int neighbors(int i, int k){
-       int length = 0;
+       int neighbors = 0;
        //top
-        if ((i-1 )){
-
+        if((i -1) >= 0){ // if it's inside the array
+           if(game[i-1][k]){
+               neighbors ++;
+           }
         }
+        //bottom
+        if((i +1) < game.length){
+            if(game[i +1][k]){
+                neighbors ++;
+            }
+        }
+        //left
+        if((k -1) < game.length){
+            if(game[i][k -1]){
+                neighbors ++;
+            }
+        }
+        //right
+        if((k +1) < game.length){
+            if(game[i][k +1]){
+                neighbors ++;
+            }
+        }
+        return neighbors;
 
     }
 
     public int[] findTailRecursive(){
-
+        resetCounters();
+        return findTailRecursive(headPosition, headPosition);
     }
 
-    private int[] findTailRecursive(int[] currentPosition, int[] previousPosition){
-
+    private int[] findTailRecursive(int[] currentPosition, int[] previousPosition){ //test cases
+        //look through the snake
     }
 
     private void resetCounters(){
+        int neighbors = 0;
+        int length = 0;
 
     }
 
     private static int getRecursiveChecks(){
-       return RecursiveChecks;
+       return recursiveCheck;
     }
 
     private static int getExhaustiveChecks(){
-        return getExhaustiveChecks();
+        return exhaustiveChecks;
     }
 
 
